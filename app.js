@@ -83,7 +83,7 @@ const UIsetup = (fromInitialSetup)=>{
         {
             for(let j = 0; j < cardsInDeck; j++)
             {
-                deck[deckIndex].src = 'img/' + cards[i][j] + '.SVG';
+                deck[deckIndex].src = 'img/' + cards[i][j] + '.svg';
                 deckIndex++;
             }
         } 
@@ -164,7 +164,7 @@ const showResult = ()=>{
     }
 
     let resultIndex = resultArr[0] * 1 + resultArr[1] * 3 + resultArr[2] * 9;
-    resultImg.src = 'img/' + temp[resultIndex] + '.SVG';
+    resultImg.src = 'img/' + temp[resultIndex] + '.svg';
 
 }
 
