@@ -1,0 +1,34 @@
+.deck{
+    width: 300px;
+    border: 1px solid black;
+    margin: 0 auto;
+    padding: 5px;
+    /* display: flex;
+    flex-wrap: wrap; */
+}
+
+.app{
+    width: 1000px;
+    /* border: 2px solid black; */
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+
+img{
+    width: 95px;
+    height: 120px;
+    border: 1px solid;
+}
+
+.result{
+    margin-bottom: 10px;
+}
+
+.start-btn{
+    margin-top: 10px;
+}
+
+body{
+    text-align: center;
+}
