@@ -1,27 +1,28 @@
 let deck = document.querySelectorAll('.app .deck img');
-let deck1 = document.querySelector('.deck1');
-let deck2 = document.querySelector('.deck2');
-let deck3 = document.querySelector('.deck3');
+let deck1 = document.querySelector('.deck1-btn');
+let deck2 = document.querySelector('.deck2-btn');
+let deck3 = document.querySelector('.deck3-btn');
 let resultImg = document.querySelector('.result');
 
 let resultArr = [];
+let gameStarted = false;
 
     deck1.addEventListener('click', ()=>{
-        if(resultArr.length < 3)
+        if(gameStarted)
         {
             update(0);
         }
     })
     
     deck2.addEventListener('click', ()=>{
-        if(resultArr.length < 3)
+        if(gameStarted)
         {
             update(1);
         }
     })
     
     deck3.addEventListener('click', ()=>{
-        if(resultArr.length < 3)
+        if(gameStarted)
         {
             update(2);
         }
@@ -77,16 +78,32 @@ const UIsetup = (fromInitialSetup)=>{
         resultImg.src = 'img/BACKSIDE.jpg';
     }
     else{
-        let deckIndex = 0;
+
+
+        let deckIndexInterval = 0;
 
         for(let i = 0; i < decks; i++)
         {
             for(let j = 0; j < cardsInDeck; j++)
             {
-                deck[deckIndex].src = 'img/' + cards[i][j] + '.svg';
-                deckIndex++;
+                deck[deckIndexInterval].src = 'img/BACKSIDE.jpg';
+                deckIndexInterval++;
             }
         } 
+
+        setInterval(()=>{
+            let deckIndex = 0;
+
+            for(let i = 0; i < decks; i++)
+            {
+                for(let j = 0; j < cardsInDeck; j++)
+                {
+                    deck[deckIndex].src = 'img/' + cards[i][j] + '.svg';
+                    deckIndex++;
+                }
+            } 
+        }, 1000);
+
     }
  
 }
@@ -145,12 +162,10 @@ const update = (chosenDeck)=>{
     }
 
     UIsetup();
-
-    console.log(resultArr);
-
 }
 
 const showResult = ()=>{
+    gameStarted = false;
     let temp = [];
     let tempIndex = 0;
 
@@ -174,6 +189,7 @@ startBtn.addEventListener('click', ()=>{
 })
 
 const startReset = ()=>{
+    gameStarted = true;
     resultArr = [];
     cards = [[], [], []];
     resultImg.src = 'img/BACKSIDE.jpg';
