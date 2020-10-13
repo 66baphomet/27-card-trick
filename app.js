@@ -3,6 +3,7 @@ let deck1 = document.querySelector('.deck1-btn');
 let deck2 = document.querySelector('.deck2-btn');
 let deck3 = document.querySelector('.deck3-btn');
 let resultImg = document.querySelector('.result');
+let message = document.querySelector('.message');
 
 let resultArr = [];
 let gameStarted = false;
@@ -57,40 +58,28 @@ const initialSetUp = ()=>{
         }
     }
 
-    UIsetup(true);
+    UIsetup();
 }
 
-const UIsetup = (fromInitialSetup)=>{
+const UIsetup = ()=>{
 
+    if(gameStarted)
+    message.innerHTML = "Dealing!";
 
-    if(fromInitialSetup)
+    let deckIndex = 0;
+
+    for(let i = 0; i < decks; i++)
     {
-        let deckIndex = 0;
-
-        for(let i = 0; i < decks; i++)
+        for(let j = 0; j < cardsInDeck; j++)
         {
-            for(let j = 0; j < cardsInDeck; j++)
-            {
-                deck[deckIndex].src = 'img/BACKSIDE.jpg';
-                deckIndex++;
-            }
-        } 
-        resultImg.src = 'img/BACKSIDE.jpg';
-    }
-    else{
+            deck[deckIndex].src = 'img/BACKSIDE.jpg';
+            deckIndex++;
+        }
+    } 
 
-
-        let deckIndexInterval = 0;
-
-        for(let i = 0; i < decks; i++)
-        {
-            for(let j = 0; j < cardsInDeck; j++)
-            {
-                deck[deckIndexInterval].src = 'img/BACKSIDE.jpg';
-                deckIndexInterval++;
-            }
-        } 
-
+    //adding an interval between the dealings
+    if(gameStarted)
+    {
         setInterval(()=>{
             let deckIndex = 0;
 
@@ -102,8 +91,18 @@ const UIsetup = (fromInitialSetup)=>{
                     deckIndex++;
                 }
             } 
-        }, 1000);
+            if(resultArr.length < 3)
+            message.innerHTML = "Choose the deck containing your card.";
+        }, 2000);
+    }
 
+    //stopping backside img when result is ready 
+    if(resultArr.length < 3)
+    {
+        resultImg.src = 'img/BACKSIDE.jpg';
+    }
+    else if(resultArr.length == 3){
+        message.innerHTML = "Your card is found!";
     }
  
 }
@@ -195,6 +194,8 @@ const startReset = ()=>{
     resultImg.src = 'img/BACKSIDE.jpg';
     initialSetUp();
     UIsetup();
+
+    message.innerHTML = "Choose the deck containing your card.";
 }
 
 initialSetUp();
